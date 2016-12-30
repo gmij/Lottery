@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" href="css/public.css" rel="stylesheet" />
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var animation = false;//是否在动画中
+        function draw(state) {
+            //一等奖 二等奖 三等奖 大号字体样式添加与删除
+            var $result = $("#draw-result"), css = "big", bool=true,
+                $money=$("#money");
+            switch (state) {
+                case "one":
+                    bool = true;
+                    $money.html("一等奖奖品<span>高仿宝马</span>");
+                    break;
+                case "two":
+                    bool = true;
+                    $money.html("二等奖奖品<span>高仿车模</span>");
+                    break;
+                case "three":
+                    bool = true;
+                    $money.html("三等奖奖金<span>10000000000000000</span>元整");
+                    break;
+                case "four":
+                    bool = false;
+                    $money.html("四等奖奖金<span>100000</span>元整");
+                    break;
+            }
+            $("#big-span").attr("class", "big-span " + state);
+            if (bool)
+                $result.addClass(css);
+            else
+                $result.removeClass(css);
+
+            $("html").addClass("draw-start");
+
+        }
+        function getUserInfo(data) {
+            var result = "";
+            $.each(data, function (i, item) {
+                result += "<span class=\"item" + (item.isAbsent ? " absent" : "") + "\"><span class=\"name\">" + item.name + "</span><span class=\"dept\">/" + item.dept + "</span></span>";
+            });
+            return result;
+        }
+        function drawOnOff(obj,state) {
+            //开始 暂停
+            var $info = $(".draw-info"), $btn = $(obj), css = "off", css2 = "select";
+            if (animation)return;
+            animation = true;
+            $btn.addClass(css2);
+            $btn.siblings("input[type='button']").removeClass(css2);
+            switch (state) {
+                case "on":
+                    $info.removeClass(css);
+                    marquee.start();
+                    setTimeout(function () { animation = false; }, 500);
+                    break;
+                case "off":
+                    marquee.stop();
+                    var $result = $("#draw-result");
+                    var data = [
+                        { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                        { name: "欧阳善于", dept: "不动产事业部", isAbsent: false },
+                        { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                        { name: "冯水溶", dept: "UI设计部", isAbsent: true },
+                        { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                        { name: "欧阳善于", dept: "不动产事业部", isAbsent: false },
+                        { name: "欧阳善于", dept: "UI设计部", isAbsent: false },
+                        { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                        { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                        { name: "欧阳善于", dept: "UI设计部", isAbsent: false },
+                        { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                        { name: "欧阳善于", dept: "不动产事业部", isAbsent: false },
+                        { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                        { name: "欧阳善于", dept: "UI设计部", isAbsent: false },
+                        { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                        { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                        { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                        { name: "欧阳善于", dept: "不动产事业部", isAbsent: false }
+                    ];
+                    $result.html(getUserInfo(data));
+                    setTimeout(function () { $info.addClass(css); }, 100);
+                    setTimeout(function () { animation = false; }, $result.hasClass('big') ? 9000 : 5000);
+                    break;
+            }
+        }
+        //滚动
+        var marquee = {
+            st:null,
+            start: function () {
+                if (this.st) return;
+                var $marquee = $("#draw-marquee"), $copy = $(".draw-marquee-copy"), speed = 10,
+                len = 1, m_top, height = $marquee.height();
+                if (!$copy.length) {
+                    $copy = $("<div class='draw-marquee-copy'></div>");
+                    $copy.html($marquee.html());
+                    $marquee.after($copy);
+                }
+                $marquee.addClass("on").css("margin-top", 230);;
+                this.st = setInterval(function () {
+                    m_top = parseInt($marquee.css("margin-top")) - len;
+                    $marquee.css("margin-top", -m_top > height ? 0 : m_top);
+                }, speed);
+            },
+            stop: function () {
+                if (!this.st) return;
+                clearInterval(this.st);
+                this.st = null;
+                $("#draw-marquee").removeClass("on").css("margin-top", "");
+            }
+        }
+        function returnIndex() {
+            if (animation) return;
+            $(".draw-start").removeClass("draw-start");
+            $(".off").removeClass("off");
+            $(".draw-btn.select").removeClass("select");
+            marquee.stop();
+        }
+        $(function () {
+            //isAbsent 是否缺席
+            var data = [
+                { name: "冯水溶", dept: "UI设计部", isAbsent:false },
+                { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                { name: "欧阳鳝鱼", dept: "不动产事业部", isAbsent: true },
+                { name: "庄裕庭", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                { name: "欧阳善于", dept: "不动产事业部", isAbsent: false },
+                { name: "放光辉", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                { name: "放光辉", dept: "不动产事业部", isAbsent: false },
+                { name: "庄裕庭", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                { name: "欧阳善于", dept: "不动产事业部", isAbsent: false },
+                { name: "欧阳善于", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                { name: "欧阳鳝鱼", dept: "不动产事业部", isAbsent: false },
+                { name: "庄裕庭", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                { name: "放光辉", dept: "不动产事业部", isAbsent: false },
+                { name: "欧阳善于", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                { name: "欧阳鳝鱼", dept: "不动产事业部", isAbsent: false },
+                { name: "庄裕庭", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                { name: "欧阳善于", dept: "不动产事业部", isAbsent: false },
+                { name: "欧阳善于", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                { name: "欧阳鳝鱼", dept: "不动产事业部", isAbsent: false },
+                { name: "庄裕庭", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "不动产事业部", isAbsent: false },
+                { name: "冯水溶", dept: "UI设计部", isAbsent: false },
+                { name: "阮荷", dept: "UI设计部", isAbsent: false },
+                { name: "放光辉", dept: "不动产事业部", isAbsent: false },
+                { name: "欧阳善于", dept: "UI设计部", isAbsent: false }
+            ];
+            $("#draw-marquee").html(getUserInfo(data))
+            //marquee.start();
+        })
+    </script>
+</head>
+<body>
+    <div class="draw-bg"></div>
+    <div class="draw-info">
+        <div class="draw-img"></div>
+        <div class="draw-trapezoid">
+            <div class="draw-marquee" id="draw-marquee">
+                
+            </div>
+        </div>
+        <div class="draw-result" id="draw-result">
+             
+        </div>
+    </div>
+    <div class="draw-btns" id="draw-btns">
+        <div class="draw-btns1">
+            <!-- 一等奖 -->
+            <span class="small-span one" onclick="draw('one')"></span>
+            <!-- 二等奖 -->
+            <span class="small-span two" onclick="draw('two')"></span>
+            <!-- 三等奖 -->
+            <span class="small-span three" onclick="draw('three')"></span>
+            <!-- 四等奖 -->
+            <span class="small-span four" onclick="draw('four')"></span>
+        </div>
+        <span class="big-span one" id="big-span"></span>
+        <input type="button" value="开始" class="draw-btn start" onclick="drawOnOff(this,'on')" />
+        <input type="button" value="停止" class="draw-btn stop" onclick="drawOnOff(this, 'off')" />
+    </div>
+    <div class="draw-text">
+        &lt;
+        <span id="money"></span>
+        &gt;
+        <span class="return_btn" onclick="returnIndex()"></span>
+    </div>
+</body>
+</html>

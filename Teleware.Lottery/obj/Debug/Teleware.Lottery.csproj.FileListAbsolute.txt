@@ -1,0 +1,6 @@
+E:\Work\Teleware\抽奖程序\Teleware.Lottery\bin\Teleware.Lottery.dll.config
+E:\Work\Teleware\抽奖程序\Teleware.Lottery\bin\Teleware.Lottery.dll
+E:\Work\Teleware\抽奖程序\Teleware.Lottery\bin\Teleware.Lottery.pdb
+E:\Work\Teleware\抽奖程序\Teleware.Lottery\obj\Debug\Teleware.Lottery.csprojResolveAssemblyReference.cache
+E:\Work\Teleware\抽奖程序\Teleware.Lottery\obj\Debug\Teleware.Lottery.dll
+E:\Work\Teleware\抽奖程序\Teleware.Lottery\obj\Debug\Teleware.Lottery.pdb

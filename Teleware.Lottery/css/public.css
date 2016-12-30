@@ -1,0 +1,76 @@
+﻿body, html { height: 100%; font-family: "Microsoft YaHei", arial, verdana, sans-serif; color: #fff; overflow: hidden; padding: 0; margin: 0; }
+input {outline:none}
+.draw-bg {background:url(images/draw_bg.jpg) no-repeat 0 0;background-size:100% 100%;width:100%;height:100%;position:absolute;top:0;left:0;z-index:-1}
+.draw-img {position:absolute;top:-120px;background:url(images/draw_img1.png) no-repeat center 0;width:784px;height:330px;left:0;width:95%;transition: all 0.5s linear 0s;}
+.draw-start .draw-img {background-image:url(images/draw_img2.png);height:259px;top:-229px;}
+
+.draw-info {width:80%;position:absolute;top:35%;left:12%; font-size:0;}
+.draw-trapezoid {transform-origin: 50% 100%;transform: perspective(300px) rotateX(25deg);position:absolute;top:0;left:0;width:100%;height:230px;overflow:hidden}
+.draw-marquee,.draw-marquee-copy  {margin-top:0;overflow:hidden;transition: all 0.5s linear 0s;display:none}
+.draw-marquee.on {transition:none}
+.draw-marquee {margin-top:230px;}
+.draw-info span {display:inline-block;vertical-align:top;}
+.draw-info .item {font-size:20px;width:20%;font-weight:bold;line-height:40px;height:40px;overflow:hidden;transition: all 0.3s linear 0s;}
+.draw-info .item .name {min-width:3em;text-align:justify; text-justify:distribute-all-lines;display:block;float:left}
+.draw-info .item .name:after { display: inline-block; content: ''; overflow: hidden; width: 100%; height: 0; }
+.draw-info .item .dept {width:6.5em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.draw-info .item.absent {color:#f98484}
+
+.draw-result {position:absolute;top:60px;left:0;width:100%;height:0;overflow:hidden;transition: all 0.2s linear 0s;}
+.draw-result .item {text-align:left;height:32px;line-height:32px;}
+.draw-result.big { top:106px;text-align:center;width:94%;height:40px;}
+.draw-result.big .item {font-size:28px;margin:0 2%;width:auto;overflow:hidden;line-height:40px;height:40px;}
+.draw-result.big .item:nth-child(3) ~ .item {display:none}
+.draw-result.big .name {}
+.draw-result.big .dept {width:auto;font-size:20px;position:relative;top:4px;}
+.draw-result.big .item span {position:relative;left:-100%;transition: all 0.5s linear 0s;}
+.draw-result.big .item .dept {left:0;top:-100%}
+
+.draw-info.off  {}
+.draw-info.off .draw-marquee,.draw-info.off .draw-marquee-copy{opacity:0;transform:scale(4,4); }
+.draw-info.off .draw-result {height:200px;transition: all 4s linear 0.5s;}
+.draw-info.off .draw-result.big {height:40px;}
+.draw-info.off .draw-result.big .item .dept{transition: all 1s linear 0.5s;}
+.draw-info.off .draw-result.big .item:nth-child(2) .dept{transition: all 1s linear 4s;}
+.draw-info.off .draw-result.big .item:nth-child(3) .dept{transition: all 1s linear 7.5s;}
+.draw-info.off .draw-result.big .item .name{transition: all 1.5s linear 2s;}
+.draw-info.off .draw-result.big .item:nth-child(2) .name{transition: all 1.5s linear 5.5s;}
+.draw-info.off .draw-result.big .item:nth-child(3) .name{transition: all 1.5s linear 9s;}
+.draw-info.off .draw-result.big .name {left:0;}
+.draw-info.off .draw-result.big .dept {top:4px;}
+
+.draw-btns {position:absolute;bottom:9%;left:0;width:100%;text-align:center;transition: all 0.5s linear 0;}
+.small-span {background:url(images/draw_font.png) no-repeat 53px -6px,url(images/draw_icons.png) no-repeat -16px -53px;width:260px;height:70px;display:inline-block;vertical-align:top;cursor:pointer;transform:scale(1,1)}
+.small-span:hover {background-position:53px -6px,-16px -147px;}
+.small-span.two {background-position:53px -85px,-16px -53px;}
+.small-span.two:hover {background-position:53px -85px,-16px -147px;}
+.small-span.three {background-position:53px -163px,-16px -53px;}
+.small-span.three:hover {background-position:53px -163px,-16px -147px;}
+.small-span.four {background-position:54px -242px,-16px -53px;}
+.small-span.four:hover {background-position:54px -242px,-16px -147px;}
+.small-span{transition: transform 0.5s linear 0.5s;}
+.small-span.two {transition: transform 0.5s linear 1s;}
+.small-span.three{transition: transform 0.5s linear 1.5s;}
+.small-span.four{transition: transform 0.5s linear 2s;}
+
+.big-span {background:url(images/draw_font.png) no-repeat 73px -311px,url(images/draw_icons.png) no-repeat 0 -232px;width:294px;height:88px;display:inline-block;vertical-align:top;margin-right:20px;position:relative;}
+.big-span.two {background-position:74px -390px,0 -232px;}
+.big-span.three {background-position:73px -469px,0 -232px;}
+.big-span.four {background-position:73px -547px,0 -232px}
+
+.draw-btn {width:128px;height:50px;background:url(images/draw_font.png) no-repeat -8px -722px,url(images/draw_icons.png) no-repeat -80px -342px;cursor:pointer;border:none;font-size:0;position:relative;top:18px;margin-right:42px;}
+.draw-btn.select {background-position:-8px -722px,-80px -436px;}
+.draw-btn.stop {background-position:-8px -643px,-80px -342px;}
+.draw-btn.select.stop {background-position:-8px -643px,-80px -436px;}
+
+.draw-start .draw-marquee, .draw-start .draw-marquee-copy {display:block}
+.big-span, .draw-btn {transform:scale(0,0);transition: transform 0.6s linear 0s;}
+.draw-start .big-span,.draw-start .draw-btn {transform:scale(1,1);}
+
+.draw-text {position:absolute;bottom:-30px;left:0;width:100%;text-align:center;font-size:25px;color:#fef625;text-shadow:1px 1px 3px rgba(65,2,8,0.78);transition: all .5s linear 0;}
+.draw-text span span {margin:0 0.5em}
+.return_btn {width:50px;height:50px;position:absolute;bottom:-75px;left:50%;margin-left:-25px;background:url(images/draw_icons.png) -120px -532px;cursor:pointer}
+
+.draw-start .draw-btns {bottom:22%}
+.draw-start .small-span{transform:scale(0,0);transition:none}
+.draw-start .draw-text {bottom:13%;}

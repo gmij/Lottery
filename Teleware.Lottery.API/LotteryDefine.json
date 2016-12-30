@@ -1,0 +1,37 @@
+﻿{
+	"Name": "2017",
+	"Partners": [
+	],
+	"Awards": [
+		{
+			"Id": "one",
+			"Name": "特等奖",
+			"Number": 1,
+			"Meed": "现金5000元"
+		},
+		{
+			"Id": "two",
+			"Name": "一等奖",
+			"Number": 5,
+			"Meed": "现金2000元"
+		},
+		{
+			"Id": "three",
+			"Name": "二等奖",
+			"Number": 30,
+			"Meed": "现金1000元"
+		},
+		{
+			"Id": "four",
+			"Name": "三等奖",
+			"Number": 50,
+			"Meed": "500"
+		},
+		{
+			"Id": "five",
+			"Name": "鼓励奖",
+			"Number": 100,
+			"Meed": "现金300"
+		}
+	]
+}
