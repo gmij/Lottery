@@ -4,3 +4,9 @@ E:\Work\Teleware\抽奖程序\Teleware.Lottery\bin\Teleware.Lottery.pdb
 E:\Work\Teleware\抽奖程序\Teleware.Lottery\obj\Debug\Teleware.Lottery.csprojResolveAssemblyReference.cache
 E:\Work\Teleware\抽奖程序\Teleware.Lottery\obj\Debug\Teleware.Lottery.dll
 E:\Work\Teleware\抽奖程序\Teleware.Lottery\obj\Debug\Teleware.Lottery.pdb
+D:\git\Repos\Lottery\Teleware.Lottery\bin\Teleware.Lottery.dll.config
+D:\git\Repos\Lottery\Teleware.Lottery\bin\Teleware.Lottery.dll
+D:\git\Repos\Lottery\Teleware.Lottery\bin\Teleware.Lottery.pdb
+D:\git\Repos\Lottery\Teleware.Lottery\obj\Debug\Teleware.Lottery.csprojResolveAssemblyReference.cache
+D:\git\Repos\Lottery\Teleware.Lottery\obj\Debug\Teleware.Lottery.dll
+D:\git\Repos\Lottery\Teleware.Lottery\obj\Debug\Teleware.Lottery.pdb

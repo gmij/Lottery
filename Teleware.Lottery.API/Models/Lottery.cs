@@ -38,19 +38,26 @@ namespace Teleware.Lottery.API.Models
 			var award = instance.Define.Awards.FirstOrDefault(a => a.Id == define.Ranking);
 			if (award == null)
 				throw new ArgumentNullException(nameof(award), "找不到该奖项");
-			//	如果希望抽取的数量，大于奖项设定数，退出
-			if (award.Number < define.Number)
-			{
-				define.Number = award.Number;
-			}
+
 			//	判断剩余该奖项的剩余名称，没有名额了则直接返回
 			var over = instance.AwardOver(award);
-			if (over == 0)
-				return new EmptyLotteryResult();
-			//	奖项的剩余名额不足
-			if (define.Number > over)
-				define.Number = over;
 
+			//	非增补情况下， 要对人员数量进行检查，
+			//	增补情况下， 暂时不做检查。
+			if (!define.Additional)
+			{
+				//	如果希望抽取的数量，大于奖项设定数，退出
+				if (award.Number < define.Number)
+				{
+					define.Number = award.Number;
+				}
+				//	判断剩余该奖项的剩余名称，没有名额了则直接返回
+				if (over == 0)
+					return new EmptyLotteryResult();
+				//	奖项的剩余名额不足
+				if (define.Number > over)
+					define.Number = over;
+			}
 			var r = new Random();
 			var list = new List<Winner>(define.Number);
 			for (var i = 0; i < define.Number; i++)

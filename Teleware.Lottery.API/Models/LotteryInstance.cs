@@ -31,9 +31,9 @@ namespace Teleware.Lottery.API.Models
 
 		private IList<Winner> Winners { get; }
 
-		public SingleLotteryDefine Begin(string award, int number)
+		public SingleLotteryDefine Begin(string award, int number, bool additional = false)
 		{
-			return new SingleLotteryDefine(Id) {Ranking = award, Number = number};
+			return new SingleLotteryDefine(Id) {Ranking = award, Number = number, Additional = additional};
 		}
 
 		public bool TryAddWinner(int workNum, Award award, out Partner p)
