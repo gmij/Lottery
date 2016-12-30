@@ -42,19 +42,13 @@ namespace Teleware.Lottery.API.Controllers
 	        }
         }
 
-		[HttpGet("{id}/{award}/{number}")]
-        public SingleLotteryResult Get(string id, string award, int number)
+		[HttpGet("{id}/{award}/{number}/{additional?}")]
+        public SingleLotteryResult Get(string id, string award, int number, bool additional = false)
         {
 	        var instance = _lottery.Get(id);
-	        return instance.Lottery(instance.Begin(award, number));
+	        return instance.Lottery(instance.Begin(award, number, additional));
         }
-
-		[HttpGet("{id}/{award}/{number}/{additional}")]
-		public SingleLotteryResult Get(string id, string award, int number, bool additional)
-		{
-			var instance = _lottery.Get(id);
-			return instance.Lottery(instance.Begin(award, number, additional));
-		}
+		
 
 
 
