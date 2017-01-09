@@ -9,7 +9,7 @@ namespace Teleware.Lottery.API.Models
 		IList<Partner> Get();
 	}
 
-	class PartnerStore : IPartnerStore
+	internal class PartnerStore : IPartnerStore
 	{
 		IList<Partner> IPartnerStore.Get()
 		{
@@ -22,7 +22,7 @@ namespace Teleware.Lottery.API.Models
 				excelReader.Read();
 				while (excelReader.Read())
 				{
-					var p = new Partner()
+					var p = new Partner
 					{
 						WorkNumber = excelReader.GetString(0),
 						Name = excelReader.GetString(1),

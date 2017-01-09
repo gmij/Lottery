@@ -7,7 +7,7 @@ namespace Teleware.Lottery.API.Models
 	{
 		public AllLotteryResult(IList<Winner> winners)
 		{
-			Winners = winners.GroupBy(w => w.Award).ToDictionary(w => w.Key.Name, w=> w.Select(p => p.Person).ToList());
+			Winners = winners.GroupBy(w => w.Award).ToDictionary(w => w.Key.Name, w => w.Select(p => p.Person).ToList());
 		}
 
 		public Dictionary<string, List<Partner>> Winners { get; }

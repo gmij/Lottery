@@ -8,3 +8,4 @@
 /Teleware.Lottery/Publish
 /Teleware.Lottery/Properties/PublishProfiles
 /Teleware.Lottery/bin
+*.user

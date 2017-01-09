@@ -22,14 +22,14 @@ namespace Teleware.Lottery.API.Models
 
 		public int Max => LotteryPool.Count;
 
+		private IList<Partner> LotteryPool => Define.Partners;
+
+		private IList<Winner> Winners { get; }
+
 		public int AwardOver(Award award)
 		{
 			return award.Number - Winners.Count(w => w.Award == award);
 		}
-
-		private IList<Partner> LotteryPool => Define.Partners;
-
-		private IList<Winner> Winners { get; }
 
 		public SingleLotteryDefine Begin(string award, int number, bool additional = false)
 		{
@@ -39,7 +39,7 @@ namespace Teleware.Lottery.API.Models
 		public bool TryAddWinner(int workNum, Award award, out Partner p)
 		{
 			p = null;
-			if (workNum > Max || workNum < 0)
+			if ((workNum > Max) || (workNum < 0))
 				return false;
 			p = LotteryPool[workNum];
 			var wn = p.WorkNumber;

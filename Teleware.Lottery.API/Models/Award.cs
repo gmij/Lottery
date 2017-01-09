@@ -23,7 +23,7 @@
 		public string Meed { get; set; }
 
 		/// <summary>
-		/// 可以抽奖的次数
+		///     可以抽奖的次数
 		/// </summary>
 		public int Round { get; set; }
 	}

@@ -9,7 +9,7 @@ namespace Teleware.Lottery.API.Models
 
 		public Award Award => Winners.FirstOrDefault()?.Award;
 
-		protected internal IList<Winner> Winners { get; set; } 
+		protected internal IList<Winner> Winners { get; set; }
 
 		public int Over { get; set; }
 	}

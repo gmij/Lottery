@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using Excel;
 using Newtonsoft.Json;
 
 namespace Teleware.Lottery.API.Models
@@ -25,7 +23,6 @@ namespace Teleware.Lottery.API.Models
 			_define = JsonConvert.DeserializeObject<LotteryDefine>(defineBody);
 			_instances = new List<LotteryInstance>();
 			_store = new PartnerStore();
-
 		}
 
 		private ILottery This => this;
@@ -48,9 +45,7 @@ namespace Teleware.Lottery.API.Models
 			{
 				//	如果希望抽取的数量，大于奖项设定数，退出
 				if (award.Number < define.Number)
-				{
 					define.Number = award.Number;
-				}
 				//	判断剩余该奖项的剩余名称，没有名额了则直接返回
 				if (over == 0)
 					return new EmptyLotteryResult();
@@ -61,7 +56,6 @@ namespace Teleware.Lottery.API.Models
 			var r = new Random();
 			var list = new List<Winner>(define.Number);
 			for (var i = 0; i < define.Number; i++)
-			{
 				while (true)
 				{
 					Partner p;
@@ -71,9 +65,8 @@ namespace Teleware.Lottery.API.Models
 					list.Add(new Winner(p, award));
 					break;
 				}
-			}
 
-			return new SingleLotteryResult()
+			return new SingleLotteryResult
 			{
 				Over = over - define.Number,
 				Winners = list
