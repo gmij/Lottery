@@ -2,3 +2,9 @@
 /Teleware.Lottery.API/bin
 /Teleware.Lottery.API/partner.xls
 *.suo
+*.dll
+*.pdb
+/Teleware.Lottery/obj
+/Teleware.Lottery/Publish
+/Teleware.Lottery/Properties/PublishProfiles
+/Teleware.Lottery/bin
