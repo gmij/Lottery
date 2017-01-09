@@ -58,9 +58,73 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\images\draw_bg.jpg" />
+    <Content Include="css\images\draw_font.png" />
+    <Content Include="css\images\draw_icons.png" />
+    <Content Include="css\images\draw_img1.png" />
+    <Content Include="css\images\draw_img2.png" />
+    <Content Include="css\images\tlw.ico" />
+    <Content Include="css\public.css" />
+    <Content Include="easyui\easyui.css" />
+    <Content Include="easyui\icon.css" />
+    <Content Include="easyui\icons\back.png" />
+    <Content Include="easyui\icons\blank.gif" />
+    <Content Include="easyui\icons\cancel.png" />
+    <Content Include="easyui\icons\clear.png" />
+    <Content Include="easyui\icons\cut.png" />
+    <Content Include="easyui\icons\edit_add.png" />
+    <Content Include="easyui\icons\edit_remove.png" />
+    <Content Include="easyui\icons\filesave.png" />
+    <Content Include="easyui\icons\filter.png" />
+    <Content Include="easyui\icons\help.png" />
+    <Content Include="easyui\icons\large_chart.png" />
+    <Content Include="easyui\icons\large_clipart.png" />
+    <Content Include="easyui\icons\large_picture.png" />
+    <Content Include="easyui\icons\large_shapes.png" />
+    <Content Include="easyui\icons\large_smartart.png" />
+    <Content Include="easyui\icons\lock.png" />
+    <Content Include="easyui\icons\man.png" />
+    <Content Include="easyui\icons\mini_add.png" />
+    <Content Include="easyui\icons\mini_edit.png" />
+    <Content Include="easyui\icons\mini_refresh.png" />
+    <Content Include="easyui\icons\more.png" />
+    <Content Include="easyui\icons\no.png" />
+    <Content Include="easyui\icons\ok.png" />
+    <Content Include="easyui\icons\pencil.png" />
+    <Content Include="easyui\icons\print.png" />
+    <Content Include="easyui\icons\redo.png" />
+    <Content Include="easyui\icons\reload.png" />
+    <Content Include="easyui\icons\search.png" />
+    <Content Include="easyui\icons\sum.png" />
+    <Content Include="easyui\icons\tip.png" />
+    <Content Include="easyui\icons\undo.png" />
+    <Content Include="easyui\images\accordion_arrows.png" />
+    <Content Include="easyui\images\blank.gif" />
+    <Content Include="easyui\images\calendar_arrows.png" />
+    <Content Include="easyui\images\combo_arrow.png" />
+    <Content Include="easyui\images\datagrid_icons.png" />
+    <Content Include="easyui\images\datebox_arrow.png" />
+    <Content Include="easyui\images\layout_arrows.png" />
+    <Content Include="easyui\images\linkbutton_bg.png" />
+    <Content Include="easyui\images\loading.gif" />
+    <Content Include="easyui\images\menu_arrows.png" />
+    <Content Include="easyui\images\messager_icons.png" />
+    <Content Include="easyui\images\pagination_icons.png" />
+    <Content Include="easyui\images\panel_tools.png" />
+    <Content Include="easyui\images\searchbox_button.png" />
+    <Content Include="easyui\images\slider_handle.png" />
+    <Content Include="easyui\images\spinner_arrows.png" />
+    <Content Include="easyui\images\tabs_icons.png" />
+    <Content Include="easyui\images\tree_icons.png" />
+    <Content Include="easyui\images\validatebox_warning.png" />
+    <Content Include="easyui\jquery.easyui.min.js" />
+    <Content Include="easyui\jquery.min.js" />
     <Content Include="index.html" />
     <Content Include="js\index.js" />
+    <Content Include="js\jquery.min.js" />
     <Content Include="Web.config" />
+    <Content Include="说明图片\1.png" />
+    <Content Include="说明图片\2.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,11 +137,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="css\" />
-    <Folder Include="easyui\" />
-    <Folder Include="说明图片\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
