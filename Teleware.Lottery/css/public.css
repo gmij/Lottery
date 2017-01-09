@@ -1,12 +1,12 @@
 ﻿body, html { height: 100%; font-family: "Microsoft YaHei", arial, verdana, sans-serif; color: #fff; overflow: hidden; padding: 0; margin: 0; }
 input {outline:none}
 .draw-bg {background:url(images/draw_bg.jpg) no-repeat 0 0;background-size:100% 100%;width:100%;height:100%;position:absolute;top:0;left:0;z-index:-1}
-.draw-img {position:absolute;top:-120px;background:url(images/draw_img1.png) no-repeat center 0;width:784px;height:330px;left:0;width:95%;transition: all 0.5s linear 0s;}
-.draw-start .draw-img {background-image:url(images/draw_img2.png);height:259px;top:-229px;}
-
+.draw-img {position:absolute;top:-120px;background:url(images/draw_img1.png) no-repeat center 0;width:784px;height:330px;left:0;width:95%;transition: all 0.5s linear 0s;z-index:99}
+.draw-start .draw-img,.draw-add .draw-img{background-image:url(images/draw_img2.png);height:259px;top:-229px;}
+/*------------------------------*/
 .draw-info {width:80%;position:absolute;top:35%;left:12%; font-size:0;}
-.draw-trapezoid {transform-origin: 50% 100%;transform: perspective(300px) rotateX(25deg);position:absolute;top:0;left:0;width:100%;height:230px;overflow:hidden}
-.draw-marquee,.draw-marquee-copy  {margin-top:0;overflow:hidden;transition: all 0.5s linear 0s;display:none}
+.draw-trapezoid {transform-origin: 50% 100%;transform: perspective(300px) rotateX(25deg);position:absolute;top:-20px;left:0;width:100%;height:230px;overflow:hidden}
+.draw-marquee,.draw-marquee-copy  {margin-top:0;overflow:hidden;display:none}
 .draw-marquee.on {transition:none}
 .draw-marquee {margin-top:230px;}
 .draw-info span {display:inline-block;vertical-align:top;}
@@ -15,62 +15,100 @@ input {outline:none}
 .draw-info .item .name:after { display: inline-block; content: ''; overflow: hidden; width: 100%; height: 0; }
 .draw-info .item .dept {width:6.5em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .draw-info .item.absent {color:#f98484}
-
-.draw-result {position:absolute;top:60px;left:0;width:100%;height:0;overflow:hidden;transition: all 0.2s linear 0s;}
-.draw-result .item {text-align:left;height:32px;line-height:32px;}
-.draw-result.big { top:106px;text-align:center;width:94%;height:40px;}
+/*-------------- 抽奖结果 ----------------*/
+.draw-result {position:absolute;top:40px;left:0;width:100%;height:0;overflow:hidden;transition: all 0.2s linear 0s;}
+.draw-result .item {text-align:left;height:32px;line-height:32px;font-size:20px;}
+.draw-result.big { top:106px;text-align:center;width:94%;}
 .draw-result.big .item {font-size:28px;margin:0 2%;width:auto;overflow:hidden;line-height:40px;height:40px;}
-.draw-result.big .item:nth-child(3) ~ .item {display:none}
 .draw-result.big .name {}
 .draw-result.big .dept {width:auto;font-size:20px;position:relative;top:4px;}
 .draw-result.big .item span {position:relative;left:-100%;transition: all 0.5s linear 0s;}
 .draw-result.big .item .dept {left:0;top:-100%}
-
+/*-------------- 抽奖开始人员名单滚动样式 ----------------*/
 .draw-info.off  {}
-.draw-info.off .draw-marquee,.draw-info.off .draw-marquee-copy{opacity:0;transform:scale(4,4); }
+.draw-info.off .draw-marquee,.draw-info.off .draw-marquee-copy{opacity:0;transform:scale(4,4);transition: all 0.5s linear 0s; }
 .draw-info.off .draw-result {height:200px;transition: all 4s linear 0.5s;}
-.draw-info.off .draw-result.big {height:40px;}
+.draw-info.off .draw-result.big {}
 .draw-info.off .draw-result.big .item .dept{transition: all 1s linear 0.5s;}
-.draw-info.off .draw-result.big .item:nth-child(2) .dept{transition: all 1s linear 4s;}
-.draw-info.off .draw-result.big .item:nth-child(3) .dept{transition: all 1s linear 7.5s;}
+/*.draw-info.off .draw-result.big .item:nth-child(2) .dept{transition: all 1s linear 4s;}
+.draw-info.off .draw-result.big .item:nth-child(3) .dept{transition: all 1s linear 7.5s;}*/
 .draw-info.off .draw-result.big .item .name{transition: all 1.5s linear 2s;}
-.draw-info.off .draw-result.big .item:nth-child(2) .name{transition: all 1.5s linear 5.5s;}
-.draw-info.off .draw-result.big .item:nth-child(3) .name{transition: all 1.5s linear 9s;}
+/*.draw-info.off .draw-result.big .item:nth-child(2) .name{transition: all 1.5s linear 5.5s;}
+.draw-info.off .draw-result.big .item:nth-child(3) .name{transition: all 1.5s linear 9s;}*/
 .draw-info.off .draw-result.big .name {left:0;}
 .draw-info.off .draw-result.big .dept {top:4px;}
+/*------------------------------*/
+.draw-btns {position:absolute;bottom:9%;left:0;width:100%;text-align:center;transition: all 0.5s linear 0.1s;font-size:0;}
+.small-span {background:url(images/draw_font.png) no-repeat 43px -865px,url(images/draw_icons.png) no-repeat -26px -53px;width:240px;height:70px;display:inline-block;vertical-align:top;cursor:pointer;transform:scale(1,1);position:relative;}
+.small-span:hover {background-position:43px -865px,-26px -147px;}
+.small-span.two {background-position:43px -6px,-26px -53px;}
+.small-span.two:hover {background-position:43px -6px,-26px -147px;}
+.small-span.three {background-position:43px -85px,-26px -53px;}
+.small-span.three:hover {background-position:43px -85px,-26px -147px;}
+.small-span.four {background-position:43px -163px,-26px -53px;}
+.small-span.four:hover {background-position:43px -163px,-26px -147px;}
+.small-span.five {background-position:45px -242px,-26px -53px;}
+.small-span.five:hover {background-position:45px -242px,-26px -147px;}
 
-.draw-btns {position:absolute;bottom:9%;left:0;width:100%;text-align:center;transition: all 0.5s linear 0;}
-.small-span {background:url(images/draw_font.png) no-repeat 53px -6px,url(images/draw_icons.png) no-repeat -16px -53px;width:260px;height:70px;display:inline-block;vertical-align:top;cursor:pointer;transform:scale(1,1)}
-.small-span:hover {background-position:53px -6px,-16px -147px;}
-.small-span.two {background-position:53px -85px,-16px -53px;}
-.small-span.two:hover {background-position:53px -85px,-16px -147px;}
-.small-span.three {background-position:53px -163px,-16px -53px;}
-.small-span.three:hover {background-position:53px -163px,-16px -147px;}
-.small-span.four {background-position:54px -242px,-16px -53px;}
-.small-span.four:hover {background-position:54px -242px,-16px -147px;}
 .small-span{transition: transform 0.5s linear 0.5s;}
-.small-span.two {transition: transform 0.5s linear 1s;}
-.small-span.three{transition: transform 0.5s linear 1.5s;}
+.small-span.two{transition: transform 0.5s linear 1s;}
+.small-span.three {transition: transform 0.5s linear 1.5s;}
 .small-span.four{transition: transform 0.5s linear 2s;}
+.small-span.five{transition: transform 0.5s linear 2.5s;}
+.draw-add-btn {transition: transform 0.5s linear 3s;}
 
-.big-span {background:url(images/draw_font.png) no-repeat 73px -311px,url(images/draw_icons.png) no-repeat 0 -232px;width:294px;height:88px;display:inline-block;vertical-align:top;margin-right:20px;position:relative;}
-.big-span.two {background-position:74px -390px,0 -232px;}
-.big-span.three {background-position:73px -469px,0 -232px;}
-.big-span.four {background-position:73px -547px,0 -232px}
+.small-span .s-num,.big-span .s-num {position:absolute;top:-10px;right:55px;background:url(images/draw_icons.png) no-repeat -229px -541px;width:34px;height:34px;font-size:14px;color:#f4d923;text-shadow:1px 1px 2px rgba(65,2,8,0.78);line-height:34px;text-align:center;letter-spacing:-1px;}
+.small-span .s-num {right:42px;}
+/*------------------------------*/
+.big-span {background:url(images/draw_font.png) no-repeat 73px -936px,url(images/draw_icons.png) no-repeat 0 -232px;width:294px;height:88px;display:inline-block;vertical-align:top;margin-right:20px;position:relative;}
+.big-span.two{background-position:74px -311px,0 -232px;}
+.big-span.three {background-position:74px -390px,0 -232px;}
+.big-span.four {background-position:73px -469px,0 -232px;}
+.big-span.five {background-position:73px -547px,0 -232px}
 
+/*------------------------------*/
 .draw-btn {width:128px;height:50px;background:url(images/draw_font.png) no-repeat -8px -722px,url(images/draw_icons.png) no-repeat -80px -342px;cursor:pointer;border:none;font-size:0;position:relative;top:18px;margin-right:42px;}
 .draw-btn.select {background-position:-8px -722px,-80px -436px;}
 .draw-btn.stop {background-position:-8px -643px,-80px -342px;}
 .draw-btn.select.stop {background-position:-8px -643px,-80px -436px;}
-
-.draw-start .draw-marquee, .draw-start .draw-marquee-copy {display:block}
+/*------------------------------*/
+.draw-start .draw-marquee, .draw-start .draw-marquee-copy,.draw-add .draw-marquee, .draw-add .draw-marquee-copy {display:block}
 .big-span, .draw-btn {transform:scale(0,0);transition: transform 0.6s linear 0s;}
-.draw-start .big-span,.draw-start .draw-btn {transform:scale(1,1);}
-
-.draw-text {position:absolute;bottom:-30px;left:0;width:100%;text-align:center;font-size:25px;color:#fef625;text-shadow:1px 1px 3px rgba(65,2,8,0.78);transition: all .5s linear 0;}
+.draw-start .big-span,.draw-start .draw-btn,.draw-add .draw-btn {transform:scale(1,1);}
+.draw-add .draw-btn {top:0;}
+.draw-text {position:absolute;bottom:-30px;left:0;width:100%;text-align:center;font-size:25px;color:#fef625;text-shadow:1px 1px 3px rgba(65,2,8,0.78);transition: all 0.5s linear 0.1s;}
 .draw-text span span {margin:0 0.5em}
 .return_btn {width:50px;height:50px;position:absolute;bottom:-75px;left:50%;margin-left:-25px;background:url(images/draw_icons.png) -120px -532px;cursor:pointer}
 
-.draw-start .draw-btns {bottom:22%}
-.draw-start .small-span{transform:scale(0,0);transition:none}
-.draw-start .draw-text {bottom:13%;}
+.draw-start .draw-btns,.draw-add .draw-btns {bottom:22%}
+.draw-start .small-span,.draw-add .small-span,.draw-start .draw-add-btn,.draw-add .draw-add-btn{transform:scale(0,0);transition:none}
+.draw-start .draw-text,.draw-add .draw-text,.draw-history .draw-text {bottom:13%;}
+.draw-add .big-span,.draw-start input.draw-add-text,.draw-start span.combo{display:none}
+/*---------- 补抽 ----------*/
+.draw-add-btn {position:absolute;top:88px;left:50%;margin-left:480px;width:100px;height:52px;background:url(images/draw_icons.png) no-repeat -20px -532px,url(images/draw_icons.png) no-repeat -103px -789px;cursor:pointer}
+.draw-add-btn:hover {background-position: -20px -532px,-103px -846px}
+input.draw-add-text {width:130px;height:50px;text-align:center;line-height:44px;border-width:0;background:url(images/draw_icons.png) no-repeat -81px -718px;cursor:auto;padding:0;transform:scale(0,0);vertical-align:top;margin:0 42px 0 0;}
+input.draw-add-text, span.combo { transform: scale(0,0);}
+.draw-add input.draw-add-text,.draw-add span.combo {transform:scale(1,1);transition: all 0.5s linear 0.1s;}
+/*----------------- easyui-combo -----------------*/
+span.combo {border-radius:0;border-width:0;background:url(images/draw_icons.png) no-repeat -49px -621px;width:200px;height:50px!important;vertical-align:top;margin:0 32px 0 0;}
+span.combo .textbox-text {height:44px!important;line-height:44px!important;border-radius:0;background:none;text-align:center;margin:0!important;}
+span.combo .textbox-text,div.combo-panel .combobox-item,.draw-add-text {font-family:'Microsoft YaHei';font-size:28px;color:#fef626;text-shadow:2px 2px 3px rgba(65,2,8,0.78);font-weight:bold;cursor:pointer}
+span.combo.textbox-focused {border-width:0;box-shadow:none}
+span.combo .textbox-icon {display:none}
+div.combo-panel {height:auto!important;background:none;border-width:0;}
+div.combo-panel .combobox-item {background:url(images/draw_icons.png) no-repeat -48px -621px;height:50px;line-height:44px;text-align:center;padding:0;}
+div.combo-panel .combobox-item-selected {color:#fa6262}
+
+/*---------- 抽奖历史 ----------*/
+.draw-historyBtn {position:absolute;top:0;left:50%;width:150px;height:150px;cursor:pointer;margin:0 0 0 -75px;}
+.draw-historyDiv {display:none;width:90%;position:absolute;top:10%;left:5%;box-sizing:border-box}
+.draw-history body> div,.draw-history #draw-awards {display:none}
+.draw-history body>.draw-historyDiv,.draw-history body>.draw-bg,.draw-history body>.draw-text{display:block;}
+
+
+.historyDiv-item {position:relative;padding:8px 10px 10px 120px;font-size:0;}
+.historyDiv-item .title {position:absolute;top:0;left:0;font-size:28px;font-weight:bold;}
+.historyDiv-item .item {width:20%;display:inline-block;vertical-align:top;font-size:14px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;font-weight:bold;line-height:24px;}
+.historyDiv-item.one, .historyDiv-item.two, .historyDiv-item.three {padding-top:2px;}
+.historyDiv-item.one .item,.historyDiv-item.two .item,.historyDiv-item.three .item {font-size:20px;line-height:40px;}

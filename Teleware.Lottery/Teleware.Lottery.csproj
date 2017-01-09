@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="js\index.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -74,7 +75,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="css\" />
-    <Folder Include="js\" />
+    <Folder Include="easyui\" />
+    <Folder Include="说明图片\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

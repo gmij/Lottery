@@ -34,7 +34,8 @@ namespace Teleware.Lottery.API.Controllers
 	        {
 		        var instance = _lottery.New();
 				Response.Cookies.Append("LotteryId", instance.Id, new CookieOptions() {HttpOnly = true});
-		        return instance;
+				Response.Headers.Add("P3P", "CP=CAO PSA OUR");
+				return instance;
 	        }
 	        else
 	        {

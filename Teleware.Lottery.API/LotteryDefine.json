@@ -7,31 +7,36 @@
 			"Id": "one",
 			"Name": "特等奖",
 			"Number": 1,
-			"Meed": "现金5000元"
+			"Meed": "现金5000元",
+			"Round": 1
 		},
 		{
 			"Id": "two",
 			"Name": "一等奖",
 			"Number": 5,
-			"Meed": "现金2000元"
+			"Meed": "现金2000元",
+			"Round": 5
 		},
 		{
 			"Id": "three",
 			"Name": "二等奖",
 			"Number": 30,
-			"Meed": "现金1000元"
+			"Meed": "现金1000元",
+			"Round": 5
 		},
 		{
 			"Id": "four",
 			"Name": "三等奖",
 			"Number": 50,
-			"Meed": "500"
+			"Meed": "500",
+			"Round": 10
 		},
 		{
 			"Id": "five",
 			"Name": "鼓励奖",
 			"Number": 100,
-			"Meed": "现金300"
+			"Meed": "现金300",
+			"Round": 10
 		}
 	]
 }

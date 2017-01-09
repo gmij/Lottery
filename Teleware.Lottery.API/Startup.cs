@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,13 +32,20 @@ namespace Teleware.Lottery.API
             // Add framework services.
             services.AddMvc();
 	        services.AddSingleton<ILottery>(new Models.Lottery());
-        }
+	        services.AddCors();
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+	        app.UseCors(builder =>
+	        {
+		        builder.AllowAnyOrigin();
+		        builder.AllowAnyHeader();
+	        });
 			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
 			app.UseMvc();
