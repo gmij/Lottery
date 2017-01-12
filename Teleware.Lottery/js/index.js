@@ -1,6 +1,6 @@
 ﻿(function ($) {
     var tlwDraw = {
-        dataUrl: "http://localhost:5000/api/lottery",
+        dataUrl: "http://" + location.hostname + ":5000/api/lottery",
         //是否在动画中
         animation: false,
         //抽奖界面ID
@@ -13,6 +13,17 @@
         awardStyle: null,
         //剩余奖品
         residualAwards: null,
+        //奖品编号
+        getAwardsNumber: function (key) {
+            var index = 0;
+            $.each(tlwDraw.awardsData, function (i, item) {
+                if (item.id == key) {
+                    index = i;
+                    return;
+                }
+            });
+            return index;
+        },
         //抽奖历史数据
         drawHistory: null,
         //设置中奖历史记录
@@ -41,15 +52,21 @@
         },
         //设置剩余奖品
         setResidualAwards: function () {
-            var awardsData = tlwDraw.awardsData, drawHistory = this.drawHistory, residualAwards=new Array();
+            var awardsData = this.awardsData, drawHistory = this.drawHistory, residualAwards = this.residualAwards,bool=false;
             if (!awardsData) return;
+            if (!residualAwards)
+            {
+                this.residualAwards = new Array();
+                residualAwards = this.residualAwards;
+                bool = true;
+            }
             $.each(awardsData, function (i, item) {
-                residualAwards.push({ id: item.id, name: item.name, number: item.number });
-                if ($.isEmptyObject(drawHistory[item.name])) return;
-                residualAwards[i].number -= drawHistory[item.name].length;
-                return;
+                if (bool)
+                    residualAwards.push({ id: item.id, name: item.name, number: item.number });
+                if ($.isEmptyObject(drawHistory[item.name]))
+                    return;
+                residualAwards[i].number = item.number - drawHistory[item.name].length;
             });
-            this.residualAwards = (residualAwards.length>0?residualAwards:null);
         },
         //更新奖项剩余奖品数
         updateResidualAwards: function () {
@@ -61,41 +78,12 @@
         },
         //奖品内容显示
         awardsShow: function (state) {
-            var i = 0, bool = true, num = 1;
-            this.awardStyle = "";
-            switch (state) {
-                case "one":
-                    //特等奖
-                    i = 0;
-                    num = 1;
-                    break;
-                case "two":
-                    //一等奖
-                    i = 1;
-                    num = 1;
-                    break;
-                case "three":
-                    //二等奖
-                    i = 2;
-                    num = 5;
-                    break;
-                case "four":
-                    //三等奖
-                    i = 3;
-                    bool = false;
-                    num = 10;
-                    break;
-                case "five":
-                    //四等奖
-                    i = 4;
-                    num = 25;
-                    bool = false;
-                    break;
-                default:
-                    return;
-            }
             var awardsData = this.awardsData;
             if (!awardsData || !awardsData.length) return;
+            var i = this.getAwardsNumber(state), bool = true, num = 1;
+            this.awardStyle = "";
+            num = awardsData[i].num;
+            bool = num > 5 ? false : true;
             var $result = $("#draw-result"), $awards = $("#draw-awards"), css = "big";
             $result.empty();
             if (!$result.length || !$awards.length) return;
@@ -123,17 +111,19 @@
         personnelShow: function () {
             var personnelData = this.personnelData;
             if (!personnelData || !personnelData.length) return;
-            $("#draw-marquee").html(this.getUserInfo(this.personnelData));
+            personnelData.sort(function () { return 0.5 - Math.random() });
+            $("#draw-marquee").html(this.getUserInfo(personnelData));
         },
         //抽奖滚动开始及暂停
         drawOnOff: function (obj, state) {
             //开始 暂停
             var $info = $("#draw-info"), $btn = $(obj), css = "off", css2 = "select";
-            if (this.animation) return;
+            if (this.animation) return false;
             this.animation = true;
             $btn.siblings("input[type='button']").removeClass(css2);
             switch (state) {
                 case "on":
+                    tlwDraw.personnelShow();
                     $info.removeClass(css);
                     drawMarquee.start();
                     setTimeout(function () { tlwDraw.animation = false; }, 500);
@@ -142,7 +132,7 @@
                     var $result = $("#draw-result"), drawId = this.drawId, awardStyle = this.awardStyle;
                     if (!drawMarquee.st || !drawId || !awardStyle || !$result.length) {
                         tlwDraw.animation = false;
-                        return;
+                        return false;
                     }
                     drawMarquee.stop();
                     var url = this.dataUrl + "/" + drawId + "/", txtNum = $("#draw-add-text").val();
@@ -157,7 +147,7 @@
                     else
                         url += awardStyle;
                     $.getJSON(url, function (json) {
-                        if (!json || !json.persons) return;
+                        if (!json || !json.persons) return false;
                         var data = json;
                         $result.html(tlwDraw.getUserInfo(data.persons));
                         tlwDraw.setDrawHistory();
@@ -170,6 +160,7 @@
                     break;
             }
             $btn.addClass(css2);
+            return true;
         },
         //返回奖项选择
         returnIndex: function () {
@@ -178,7 +169,7 @@
             $(".draw-add").removeClass("draw-add");
             $(".draw-history").removeClass("draw-history");
             $(".off").removeClass("off");
-            $(".draw-btn.select").removeClass("select");
+            $(".draw-btn").attr("class", "draw-btn start");
             drawMarquee.stop();
         },
         //创建奖项按钮
@@ -216,8 +207,16 @@
                     tlwDraw.awardsShow(item.id);
                 }
             });
-            $("#startBtn").click(function () { tlwDraw.drawOnOff(this, 'on'); });//开始按钮
-            $("#stopBtn").click(function () { tlwDraw.drawOnOff(this, 'off'); });//暂停按钮
+            //开始按钮
+            var css = "start", css2 = "stop", $btn = $("#startBtn");
+            $btn.add($("#big-span")).click(function () {
+                var $num = $(this).find(".s-num");
+                if ($num.length && parseInt($num.text()) <= 0)
+                    return;
+                if (tlwDraw.drawOnOff($btn, $btn.hasClass(css) ? 'on' : "off"))
+                    $btn.toggleClass(css).toggleClass(css2);
+            });
+            //$("#stopBtn").click(function () { tlwDraw.drawOnOff(this, 'off'); });//暂停按钮
             $("#returnBtn").click(function () { tlwDraw.returnIndex(); });//返回首页按钮
 
             //中奖历史显示按钮
@@ -253,6 +252,9 @@
                 }
                 tlwDraw.personnelData = json.define.partners;
                 tlwDraw.awardsData = json.define.awards;
+                $.each(tlwDraw.awardsData, function (i,item) {
+                    item.num= Math.ceil(item.number / item.round);
+                })
                 tlwDraw.personnelShow();
                 tlwDraw.createBtns();
                 tlwDraw.setDrawHistory();

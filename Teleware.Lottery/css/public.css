@@ -5,25 +5,25 @@ input {outline:none}
 .draw-start .draw-img,.draw-add .draw-img{background-image:url(images/draw_img2.png);height:259px;top:-229px;}
 /*------------------------------*/
 .draw-info {width:80%;position:absolute;top:35%;left:12%; font-size:0;}
-.draw-trapezoid {transform-origin: 50% 100%;transform: perspective(300px) rotateX(25deg);position:absolute;top:-20px;left:0;width:100%;height:230px;overflow:hidden}
+.draw-trapezoid {transform-origin: 50% 100%;transform: perspective(300px) rotateX(25deg);position:absolute;top:-5px;left:0;width:100%;height:230px;overflow:hidden}
 .draw-marquee,.draw-marquee-copy  {margin-top:0;overflow:hidden;display:none}
 .draw-marquee.on {transition:none}
 .draw-marquee {margin-top:230px;}
 .draw-info span {display:inline-block;vertical-align:top;}
 .draw-info .item {font-size:20px;width:20%;font-weight:bold;line-height:40px;height:40px;overflow:hidden;transition: all 0.3s linear 0s;}
 .draw-info .item .name {min-width:3em;text-align:justify; text-justify:distribute-all-lines;display:block;float:left}
-.draw-info .item .name:after { display: inline-block; content: ''; overflow: hidden; width: 100%; height: 0; }
+.draw-info .item .name:after { display: inline-block; content: ''; overflow: hidden; width: 100%; height: 0;line-height:0; }
 .draw-info .item .dept {width:6.5em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .draw-info .item.absent {color:#f98484}
 /*-------------- 抽奖结果 ----------------*/
-.draw-result {position:absolute;top:40px;left:0;width:100%;height:0;overflow:hidden;transition: all 0.2s linear 0s;}
-.draw-result .item {text-align:left;height:32px;line-height:32px;font-size:20px;}
-.draw-result.big { top:106px;text-align:center;width:94%;}
-.draw-result.big .item {font-size:28px;margin:0 2%;width:auto;overflow:hidden;line-height:40px;height:40px;}
-.draw-result.big .name {}
-.draw-result.big .dept {width:auto;font-size:20px;position:relative;top:4px;}
+.draw-result {position:absolute;top:76px;left:0;width:100%;height:0;overflow:hidden;transition: all 0.2s linear 0s;}
+.draw-result .item {text-align:left;height:40px;line-height:40px;width:25%;font-size:22px;}
+.draw-result .item .dept {width:9em;font-size:18px;top:4px;}
+.draw-result.big { top:102px;text-align:center;width:94%;}
+.draw-result.big .item {font-size:28px;margin:0 2%;width:auto;overflow:hidden;line-height:50px;height:50px;}
+.draw-result.big .item .name {}
 .draw-result.big .item span {position:relative;left:-100%;transition: all 0.5s linear 0s;}
-.draw-result.big .item .dept {left:0;top:-100%}
+.draw-result.big .item .dept {width:auto;font-size:20px;position:relative;left:0;top:-100%}
 /*-------------- 抽奖开始人员名单滚动样式 ----------------*/
 .draw-info.off  {}
 .draw-info.off .draw-marquee,.draw-info.off .draw-marquee-copy{opacity:0;transform:scale(4,4);transition: all 0.5s linear 0s; }
@@ -60,7 +60,7 @@ input {outline:none}
 .small-span .s-num,.big-span .s-num {position:absolute;top:-10px;right:55px;background:url(images/draw_icons.png) no-repeat -229px -541px;width:34px;height:34px;font-size:14px;color:#f4d923;text-shadow:1px 1px 2px rgba(65,2,8,0.78);line-height:34px;text-align:center;letter-spacing:-1px;}
 .small-span .s-num {right:42px;}
 /*------------------------------*/
-.big-span {background:url(images/draw_font.png) no-repeat 73px -936px,url(images/draw_icons.png) no-repeat 0 -232px;width:294px;height:88px;display:inline-block;vertical-align:top;margin-right:20px;position:relative;}
+.big-span {background:url(images/draw_font.png) no-repeat 73px -936px,url(images/draw_icons.png) no-repeat 0 -232px;width:294px;height:88px;display:inline-block;vertical-align:top;margin-left:5px;position:relative;cursor:pointer;}
 .big-span.two{background-position:74px -311px,0 -232px;}
 .big-span.three {background-position:74px -390px,0 -232px;}
 .big-span.four {background-position:73px -469px,0 -232px;}
@@ -74,15 +74,18 @@ input {outline:none}
 /*------------------------------*/
 .draw-start .draw-marquee, .draw-start .draw-marquee-copy,.draw-add .draw-marquee, .draw-add .draw-marquee-copy {display:block}
 .big-span, .draw-btn {transform:scale(0,0);transition: transform 0.6s linear 0s;}
-.draw-start .big-span,.draw-start .draw-btn,.draw-add .draw-btn {transform:scale(1,1);}
+.draw-start .draw-btn {display:none}
+.draw-start .big-span,.draw-add .draw-btn {transform:scale(1,1);}
 .draw-add .draw-btn {top:0;}
 .draw-text {position:absolute;bottom:-30px;left:0;width:100%;text-align:center;font-size:25px;color:#fef625;text-shadow:1px 1px 3px rgba(65,2,8,0.78);transition: all 0.5s linear 0.1s;}
 .draw-text span span {margin:0 0.5em}
-.return_btn {width:50px;height:50px;position:absolute;bottom:-75px;left:50%;margin-left:-25px;background:url(images/draw_icons.png) -120px -532px;cursor:pointer}
+.return_btn {width:50px;height:50px;position:absolute;bottom:-75px;left:50%;margin-left:-25px;background:url(images/draw_icons.png) -120px -532px;cursor:pointer;z-index:999}
+/*隐藏奖品信息*/
+#draw-awards {display:none}
 
-.draw-start .draw-btns,.draw-add .draw-btns {bottom:22%}
+.draw-start .draw-btns,.draw-add .draw-btns {bottom:18%}
 .draw-start .small-span,.draw-add .small-span,.draw-start .draw-add-btn,.draw-add .draw-add-btn{transform:scale(0,0);transition:none}
-.draw-start .draw-text,.draw-add .draw-text,.draw-history .draw-text {bottom:13%;}
+.draw-start .draw-text,.draw-add .draw-text {bottom:13%;}
 .draw-add .big-span,.draw-start input.draw-add-text,.draw-start span.combo{display:none}
 /*---------- 补抽 ----------*/
 .draw-add-btn {position:absolute;top:88px;left:50%;margin-left:480px;width:100px;height:52px;background:url(images/draw_icons.png) no-repeat -20px -532px,url(images/draw_icons.png) no-repeat -103px -789px;cursor:pointer}
@@ -102,13 +105,17 @@ div.combo-panel .combobox-item-selected {color:#fa6262}
 
 /*---------- 抽奖历史 ----------*/
 .draw-historyBtn {position:absolute;top:0;left:50%;width:150px;height:150px;cursor:pointer;margin:0 0 0 -75px;}
-.draw-historyDiv {display:none;width:90%;position:absolute;top:10%;left:5%;box-sizing:border-box}
+.draw-historyDiv {display:none;width:90%;position:absolute;top:1%;left:5%;box-sizing:border-box;height:90%;overflow:auto}
 .draw-history body> div,.draw-history #draw-awards {display:none}
 .draw-history body>.draw-historyDiv,.draw-history body>.draw-bg,.draw-history body>.draw-text{display:block;}
-
+.draw-history .draw-text {bottom:12%}
 
 .historyDiv-item {position:relative;padding:8px 10px 10px 120px;font-size:0;}
 .historyDiv-item .title {position:absolute;top:0;left:0;font-size:28px;font-weight:bold;}
-.historyDiv-item .item {width:20%;display:inline-block;vertical-align:top;font-size:14px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;font-weight:bold;line-height:24px;}
-.historyDiv-item.one, .historyDiv-item.two, .historyDiv-item.three {padding-top:2px;}
-.historyDiv-item.one .item,.historyDiv-item.two .item,.historyDiv-item.three .item {font-size:20px;line-height:40px;}
+.historyDiv-item .item {width:19%;display:inline-block;vertical-align:top;font-size:14px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;font-weight:bold;line-height:24px;margin-right:1%}
+.historyDiv-item.one{padding-top:1px;}
+.historyDiv-item.one .item {font-size:20px;line-height:40px;}
+.historyDiv-item.two {padding-top:9px;}
+.historyDiv-item.two .item {font-size:18px;}
+.historyDiv-item.three {padding-top:6px;}
+.historyDiv-item.three .item {font-size:16px;}
