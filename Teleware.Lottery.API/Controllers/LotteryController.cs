@@ -40,7 +40,7 @@ namespace Teleware.Lottery.API.Controllers
 		[HttpGet("{id}")]
 		public AllLotteryResult Get(string id)
 		{
-			var instance = _lottery.Get(id);
+			var instance = _lottery.Get(id) ?? _lottery.GetExistsInstance();
 			return instance.Total();
 		}
 	}
