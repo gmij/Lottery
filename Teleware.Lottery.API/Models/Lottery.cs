@@ -85,5 +85,10 @@ namespace Teleware.Lottery.API.Models
 		{
 			return _instances.FirstOrDefault(instance => instance.Id == id);
 		}
-	}
+
+        LotteryInstance ILottery.GetExistsInstance()
+        {
+            return _instances.FirstOrDefault();
+        }
+    }
 }

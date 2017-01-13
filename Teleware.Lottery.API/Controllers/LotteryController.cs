@@ -24,10 +24,7 @@ namespace Teleware.Lottery.API.Controllers
 			var id = Request.Cookies["LotteryId"];
 			if (string.IsNullOrEmpty(id))
 			{
-				var instance = _lottery.New();
-				Response.Cookies.Append("LotteryId", instance.Id, new CookieOptions {HttpOnly = true});
-				Response.Headers.Add("P3P", "CP=CAO PSA OUR");
-				return instance;
+			    return _lottery.GetExistsInstance() ?? _lottery.New();
 			}
 			return _lottery.Get(id);
 		}

@@ -7,5 +7,7 @@
 		SingleLotteryResult Lottery(SingleLotteryDefine define);
 
 		LotteryInstance Get(string id);
+
+	    LotteryInstance GetExistsInstance();
 	}
 }
