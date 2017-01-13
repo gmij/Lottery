@@ -8,6 +8,7 @@
 
 <p>
 usage:
+<br/>
 创建新的抽奖
 GET  http://localhost:5000/api/lottery
 
