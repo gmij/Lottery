@@ -95,7 +95,7 @@
                 $result.addClass(css);
             else
                 $result.removeClass(css);
-            $("#big-span").attr("class", "big-span " + state).find(".s-num").html(this.residualAwards[i].number)
+	        $("#big-span").attr("class", "big-span " + state).find(".s-num").html(this.residualAwards[i].number);
         },
         //人员名单显示HTML结构
         getUserInfo: function (data) {
@@ -229,18 +229,18 @@
             });
         },
         //设置DrawId Cookie值
-        setDrawId: function (drawId) {
-            var name = "lotteryId";
-            document.cookie = name+"=" + escape(drawId);
-        },
-        //读取DrawId Cookie值
-        getDrawId: function () {
-            var arr, name = "lotteryId", reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-            if (arr = document.cookie.match(reg))
-                return unescape(arr[2]);
-            else
-                return null;
-        },
+        //setDrawId: function (drawId) {
+        //    var name = "lotteryId";
+        //    document.cookie = name+"=" + escape(drawId);
+        //},
+        ////读取DrawId Cookie值
+        //getDrawId: function () {
+        //    var arr, name = "lotteryId", reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        //    if (arr = document.cookie.match(reg))
+        //        return unescape(arr[2]);
+        //    else
+        //        return null;
+        //},
         //数据初始化
         init: function () {
             $.getJSON(this.dataUrl, function (json) {
@@ -253,9 +253,10 @@
                 //}
                 tlwDraw.personnelData = json.define.partners;
                 tlwDraw.awardsData = json.define.awards;
-                $.each(tlwDraw.awardsData, function (i,item) {
-                    item.num= Math.ceil(item.number / item.round);
-                })
+	            $.each(tlwDraw.awardsData,
+		            function(i, item) {
+			            item.num = Math.ceil(item.number / item.round);
+		            });
                 tlwDraw.personnelShow();
                 tlwDraw.createBtns();
                 tlwDraw.setDrawHistory();
