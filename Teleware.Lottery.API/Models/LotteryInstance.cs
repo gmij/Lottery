@@ -6,17 +6,17 @@ namespace Teleware.Lottery.API.Models
 {
 	public class LotteryInstance
 	{
-		private readonly Func<SingleLotteryDefine, SingleLotteryResult> _func;
+		internal Func<SingleLotteryDefine, SingleLotteryResult> LotteryFunc;
 
 		public LotteryInstance(LotteryDefine define, Func<SingleLotteryDefine, SingleLotteryResult> lotteryFunc)
 		{
 			Define = define;
 			Id = Guid.NewGuid().ToString("d");
-			_func = lotteryFunc;
+			LotteryFunc = lotteryFunc;
 			Winners = new List<Winner>(define.Awards.Sum(a => a.Number));
 		}
 
-		public string Id { get; }
+		public string Id { get; set; }
 
 		public LotteryDefine Define { get; }
 
@@ -24,7 +24,8 @@ namespace Teleware.Lottery.API.Models
 
 		private IList<Partner> LotteryPool => Define.Partners;
 
-		private IList<Winner> Winners { get; }
+		public IList<Winner> Winners { get; set; }
+
 
 		public int AwardOver(Award award)
 		{
@@ -51,7 +52,7 @@ namespace Teleware.Lottery.API.Models
 
 		public SingleLotteryResult Lottery(SingleLotteryDefine define)
 		{
-			return _func(define);
+			return LotteryFunc(define);
 		}
 
 		public AllLotteryResult Total()

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Teleware.Lottery.API.Models;
 
@@ -21,18 +22,17 @@ namespace Teleware.Lottery.API.Controllers
 		[HttpGet]
 		public LotteryInstance Get()
 		{
-			var id = Request.Cookies["LotteryId"];
-			if (string.IsNullOrEmpty(id))
-			{
-			    return _lottery.GetExistsInstance() ?? _lottery.New();
-			}
-			return _lottery.Get(id);
+			return _lottery.GetExistsInstance() ?? _lottery.New();
 		}
 
 		[HttpGet("{id}/{award}/{number}/{additional?}")]
 		public SingleLotteryResult Get(string id, string award, int number, bool additional = false)
 		{
 			var instance = _lottery.Get(id);
+			if (instance == null)
+			{
+				throw new NullReferenceException("服务端已重启，请刷新客户端");
+			}
 			return instance.Lottery(instance.Begin(award, number, additional));
 		}
 

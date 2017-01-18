@@ -14,18 +14,24 @@ namespace Teleware.Lottery.API.Models
 
 		private readonly IPartnerStore _store;
 
+		private ILottery This => this;
+
 		public Lottery()
 		{
-			var definePath = Path.Combine(Directory.GetCurrentDirectory(), "lotterydefine.json");
+			var definePath = ComboPath("lotterydefine.json");
 			var defineBody = File.ReadAllText(definePath);
 			if (string.IsNullOrEmpty(defineBody))
 				throw new FileNotFoundException("找不到奖项定义文件", definePath);
 			_define = JsonConvert.DeserializeObject<LotteryDefine>(defineBody);
-			_instances = new List<LotteryInstance>();
+			_instances = This.Load();// new List<LotteryInstance>();
 			_store = new PartnerStore();
 		}
 
-		private ILottery This => this;
+		private string ComboPath(string fileName)
+		{
+			return Path.Combine(Directory.GetCurrentDirectory(), fileName);
+		}
+
 
 		SingleLotteryResult ILottery.Lottery(SingleLotteryDefine define)
 		{
@@ -65,7 +71,7 @@ namespace Teleware.Lottery.API.Models
 					list.Add(new Winner(p, award));
 					break;
 				}
-
+			This.Save();
 			return new SingleLotteryResult
 			{
 				Over = over - define.Number,
@@ -90,5 +96,29 @@ namespace Teleware.Lottery.API.Models
         {
             return _instances.FirstOrDefault();
         }
-    }
+
+		void ILottery.Save()
+		{
+			var content = JsonConvert.SerializeObject(_instances);
+			var file = ComboPath("lotteryInstance.json");
+			File.WriteAllText(file, content);
+		}
+
+		IList<LotteryInstance> ILottery.Load()
+		{
+			var file = ComboPath("lotteryInstance.json");
+			if (File.Exists(file))
+			{
+				var content = File.ReadAllText(file);
+				var instances = JsonConvert.DeserializeObject<IList<LotteryInstance>>(content);
+				foreach (var instance in instances)
+				{
+					instance.LotteryFunc = This.Lottery;
+				}
+				return instances.TakeWhile(instance => instance.Define.Awards.Sum(a => a.Number) > instance.Winners.Count).ToList();
+
+			}
+			return new List<LotteryInstance>();
+		}
+	}
 }

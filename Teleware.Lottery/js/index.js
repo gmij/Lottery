@@ -80,10 +80,9 @@
         awardsShow: function (state) {
             var awardsData = this.awardsData;
             if (!awardsData || !awardsData.length) return;
-            var i = this.getAwardsNumber(state), bool = true, num = 1;
+            var i = this.getAwardsNumber(state), bool = true, num = awardsData[i].num;
             this.awardStyle = "";
-            num = awardsData[i].num;
-            bool = num > 5 ? false : true;
+            bool = num > 9 ? false : true;
             var $result = $("#draw-result"), $awards = $("#draw-awards"), css = "big";
             $result.empty();
             if (!$result.length || !$awards.length) return;
@@ -96,7 +95,7 @@
                 $result.addClass(css);
             else
                 $result.removeClass(css);
-            $("#big-span").attr("class", "big-span " + state).find(".s-num").html(this.residualAwards[i].number);
+            $("#big-span").attr("class", "big-span " + state).find(".s-num").html(this.residualAwards[i].number)
         },
         //人员名单显示HTML结构
         getUserInfo: function (data) {
@@ -146,6 +145,7 @@
                     }
                     else
                         url += awardStyle;
+                    $(".draw-countdown").addClass("show");
                     $.getJSON(url, function (json) {
                         if (!json || !json.persons) return false;
                         var data = json;
@@ -154,7 +154,7 @@
                         tlwDraw.updateResidualAwards();
                         setTimeout(function () { $info.addClass(css); }, 100);
                         //$result.hasClass('big') ? 9000 : 5000
-                        setTimeout(function () { tlwDraw.animation = false; }, 5000);
+                        setTimeout(function () { tlwDraw.animation = false; $(".draw-countdown").removeClass("show"); }, 6200);
                     });
 
                     break;
@@ -179,7 +179,7 @@
             $btns.empty();
             //奖项选择按钮
             function addBtn(data) {
-                $btn = $("<span class='draw1 small-span " + data.id + "' id='awards-" + data.id + "'><span class='s-num'>" + data.number + "</span></span>");
+                $btn = $("<span class='small-span " + data.id + "' id='awards-" + data.id + "'><span class='s-num'>" + data.number + "</span></span>");
                 $btns.append($btn);
                 $btn.click(function () {
                     if (parseInt($(this).find(".s-num").text())<=0) return;
@@ -229,33 +229,33 @@
             });
         },
         //设置DrawId Cookie值
-        //setDrawId: function (drawId) {
-        //    var name = "lotteryId";
-        //    document.cookie = name+"=" + escape(drawId);
-        //},
-        ////读取DrawId Cookie值
-        //getDrawId: function () {
-        //    var arr, name = "lotteryId", reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-        //    if (arr = document.cookie.match(reg))
-        //        return unescape(arr[2]);
-        //    else
-        //        return null;
-        //},
+        setDrawId: function (drawId) {
+            var name = "lotteryId";
+            document.cookie = name+"=" + escape(drawId);
+        },
+        //读取DrawId Cookie值
+        getDrawId: function () {
+            var arr, name = "lotteryId", reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if (arr = document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        },
         //数据初始化
         init: function () {
             $.getJSON(this.dataUrl, function (json) {
                 if (!json || !json.id) return;
                 tlwDraw.drawId = json.id;
-                if (!tlwDraw.drawId) {
-                    //tlwDraw.setDrawId(json.id);
-                    tlwDraw.drawId = json.id;
-                }
+                //tlwDraw.drawId = tlwDraw.getDrawId();
+                //if (!tlwDraw.drawId) {
+                //    tlwDraw.setDrawId(json.id);
+                //    tlwDraw.drawId = json.id;
+                //}
                 tlwDraw.personnelData = json.define.partners;
                 tlwDraw.awardsData = json.define.awards;
-                $.each(tlwDraw.awardsData,
-                    function(i, item) {
-                        item.num = Math.ceil(item.number / item.round);
-                    });
+                $.each(tlwDraw.awardsData, function (i,item) {
+                    item.num= Math.ceil(item.number / item.round);
+                })
                 tlwDraw.personnelShow();
                 tlwDraw.createBtns();
                 tlwDraw.setDrawHistory();
@@ -270,7 +270,7 @@
         start: function () {
             if (this.st) return;
             var $marquee = $("#draw-marquee"), $copy = $(".draw-marquee-copy"), speed = 10,
-            len = 2, m_top, height = $marquee.height();
+            len = 20, m_top, height = $marquee.height();
             if (!$copy.length) {
                 $copy = $("<div class='draw-marquee-copy'></div>");
                 $copy.html($marquee.html());

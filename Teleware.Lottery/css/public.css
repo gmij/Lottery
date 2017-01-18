@@ -1,10 +1,10 @@
 ﻿body, html { height: 100%; font-family: "Microsoft YaHei", arial, verdana, sans-serif; color: #fff; overflow: hidden; padding: 0; margin: 0;position:relative}
 input {outline:none}
 .draw-bg {background:url(images/draw_bg.jpg) no-repeat 0 0;background-size:100% 100%;width:100%;height:100%;position:absolute;top:0;left:0;z-index:-1}
-.draw-img {position:absolute;/*top:-120px;*/top:-180px;background:url(images/draw_img2.png) no-repeat center 0;width:784px;/*height:330px;*/height:259px;left:0;width:95%;transition: all 0.5s linear 0s;-webkit-transition: all 0.5s linear 0s;z-index:99}
-.draw-start .draw-img,.draw-add .draw-img{/*background-image:url(images/draw_img2.png);height:259px;*/top:-229px;}
+.draw-img {position:absolute;/*top:-120px;*/top:-180px;background:url(images/draw_img1.png) no-repeat center 0;width:784px;height:330px;/*height:259px;*/left:0;width:98%;transition: all 0.5s linear 0s;-webkit-transition: all 0.5s linear 0s;z-index:99}
+.draw-start .draw-img,.draw-add .draw-img{background-image:url(images/draw_img2.png);height:259px;top:-229px;}
 /*------------------------------*/
-.draw-info {width:80%;position:absolute;top:35%;left:12%; font-size:0;}
+.draw-info {width:1000px;position:absolute;top:35%;left:50%; font-size:0;margin-left:-490px}
 .draw-trapezoid {transform-origin: 50% 100%;-webkit-transform-origin: 50% 100%;transform: perspective(300px) rotateX(25deg);-webkit-transform: perspective(300px) rotateX(25deg);position:absolute;top:-5px;left:0;width:100%;height:230px;overflow:hidden}
 .draw-marquee,.draw-marquee-copy  {margin-top:0;overflow:hidden;display:none}
 .draw-marquee.on {transition:none;-webkit-transition:none}
@@ -16,10 +16,10 @@ input {outline:none}
 .draw-info .item .dept {width:6.5em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .draw-info .item.absent {color:#f98484}
 /*-------------- 抽奖结果 ----------------*/
-.draw-result {position:absolute;top:76px;left:0;width:100%;height:0;overflow:hidden;transition: all 0.2s linear 0s;-webkit-transition: all 0.2s linear 0s;}
-.draw-result .item {text-align:left;height:40px;line-height:40px;width:25%;font-size:22px;}
-.draw-result .item .dept {width:9em;font-size:18px;top:4px;}
-.draw-result.big { top:102px;text-align:center;width:94%;}
+.draw-result {position:absolute;top:76px;left:3%;width:94%;height:0;overflow:hidden;transition: all 0.2s linear 0s;-webkit-transition: all 0.2s linear 0s;box-sizing:border-box}
+.draw-result .item {text-align:left;height:40px;line-height:40px;width:25%;font-size:20px;}
+.draw-result .item .dept {width:9em;font-size:16px;top:4px;}
+.draw-result.big { top:102px;text-align:center;}
 .draw-result.big .item {font-size:28px;margin:0 2%;width:auto;overflow:hidden;line-height:50px;height:50px;}
 .draw-result.big .item .name {}
 .draw-result.big .item span {position:relative;left:-100%;transition: all 0.5s linear 0s;-webkit-transition: all 0.5s linear 0s;}
@@ -27,19 +27,20 @@ input {outline:none}
 /*-------------- 抽奖开始人员名单滚动样式 ----------------*/
 .draw-info.off  {}
 .draw-info.off .draw-marquee,.draw-info.off .draw-marquee-copy{opacity:0;/*transform:scale(4,4);-webkit-transform:scale(4,4);*/transition: all 0.5s linear 0s;-webkit-transition: all 0.5s linear 0s; }
-.draw-info.off .draw-result {height:200px;transition: all 4s linear 0.5s;-webkit-transition: all 4s linear 0.5s;}
+.draw-info.off .draw-result {height:200px;transition: all 4s linear 5s;-webkit-transition: all 4s linear 5s;}
 .draw-info.off .draw-result.big {}
-.draw-info.off .draw-result.big .item .dept{transition: all 1s linear 0.5s;-webkit-transition: all 1s linear 0.5s;}
+/*.draw-info.off .draw-result.big .item .dept{transition: all 1s linear 0.5s;-webkit-transition: all 1s linear 0.5s;}*/
 /*.draw-info.off .draw-result.big .item:nth-child(2) .dept{transition: all 1s linear 4s;}
 .draw-info.off .draw-result.big .item:nth-child(3) .dept{transition: all 1s linear 7.5s;}*/
-.draw-info.off .draw-result.big .item .name{transition: all 1.5s linear 2s;-webkit-transition: all 1.5s linear 2s;}
+/*.draw-info.off .draw-result.big .item .name{transition: all 1.5s linear 2s;-webkit-transition: all 1.5s linear 2s;}*/
 /*.draw-info.off .draw-result.big .item:nth-child(2) .name{transition: all 1.5s linear 5.5s;}
 .draw-info.off .draw-result.big .item:nth-child(3) .name{transition: all 1.5s linear 9s;}*/
 .draw-info.off .draw-result.big .name {left:0;}
 .draw-info.off .draw-result.big .dept {top:4px;}
 /*------------------------------*/
 .draw-btns {position:absolute;bottom:9%;left:0;width:100%;text-align:center;transition: all 0.5s linear 0.1s;-webkit-transition: all 0.5s linear 0.1s;font-size:0;}
-.small-span {background:url(images/draw_font.png) no-repeat 43px -865px,url(images/draw_icons.png) no-repeat -26px -53px;width:240px;height:70px;display:inline-block;vertical-align:top;cursor:pointer;transform:scale(1,1);-webkit-transform:scale(1,1);position:relative;}
+.draw-btns2 {width:90%;margin:auto}
+.small-span {background:url(images/draw_font.png) no-repeat 43px -865px,url(images/draw_icons.png) no-repeat -26px -53px;width:240px;height:70px;display:inline-block;vertical-align:top;cursor:pointer;transform:scale(1,1);-webkit-transform:scale(1,1);position:relative;margin-bottom:10px;}
 .small-span:hover {background-position:43px -865px,-26px -147px;}
 .small-span.two {background-position:43px -6px,-26px -53px;}
 .small-span.two:hover {background-position:43px -6px,-26px -147px;}
@@ -88,7 +89,7 @@ input {outline:none}
 .draw-start .draw-text,.draw-add .draw-text {bottom:13%;}
 .draw-add .big-span,.draw-start input.draw-add-text,.draw-start span.combo{display:none}
 /*---------- 补抽 ----------*/
-.draw-add-btn {position:absolute;top:88px;left:50%;margin-left:480px;width:100px;height:52px;background:url(images/draw_icons.png) no-repeat -20px -532px,url(images/draw_icons.png) no-repeat -103px -789px;cursor:pointer}
+.draw-add-btn {position:absolute;bottom:-30px;right:10px;width:100px;height:52px;background:url(images/draw_icons.png) no-repeat -20px -532px,url(images/draw_icons.png) no-repeat -103px -789px;cursor:pointer}
 .draw-add-btn:hover {background-position: -20px -532px,-103px -846px}
 input.draw-add-text {width:130px;height:50px;text-align:center;line-height:44px;border-width:0;background:url(images/draw_icons.png) no-repeat -81px -718px;cursor:auto;padding:0;transform:scale(0,0);-webkit-transform:scale(0,0);vertical-align:top;margin:0 42px 0 0;}
 input.draw-add-text, span.combo { transform: scale(0,0);-webkit-transform: scale(0,0);}
@@ -119,3 +120,32 @@ div.combo-panel .combobox-item-selected {color:#fa6262}
 .historyDiv-item.two .item {font-size:18px;}
 .historyDiv-item.three {padding-top:6px;}
 .historyDiv-item.three .item {font-size:16px;}
+
+/*倒计时*/
+.draw-countdown {width:106px;height:165px;background:url(images/countdown.png) no-repeat 0 -714px;position:absolute;top:50%;left:50%;margin:-53px 0 0 -50px;opacity:0;z-index:-1;}
+.draw-countdown.show {animation: 6s 0s ease-out forwards countdown1;z-index:999;}
+@keyframes countdown1 {
+    18% { opacity: 1; background-position: 0 -714px; }
+    19% { opacity: 0; background-position: 0 -515px; }
+    36% { opacity: 1; background-position: 0 -515px; }
+    37% { opacity: 0; background-position: 0 -350px; }
+    54% { opacity: 1; background-position: 0 -350px; }
+    55% { opacity: 0; background-position: 0 -166px; }
+    72% { opacity: 1; background-position: 0 -166px; }
+    73% { opacity: 0; background-position: 0 18px; }
+    90% { opacity: 1; background-position: 0 18px; }
+    100% { opacity: 0; background-position: 0 183px; }
+}
+
+@-webkit-keyframes countdown1 {
+    18% { opacity: 1; background-position: 0 -714px; }
+    19% { opacity: 0; background-position: 0 -515px; }
+    36% { opacity: 1; background-position: 0 -515px; }
+    37% { opacity: 0; background-position: 0 -350px; }
+    54% { opacity: 1; background-position: 0 -350px; }
+    55% { opacity: 0; background-position: 0 -166px; }
+    72% { opacity: 1; background-position: 0 -166px; }
+    73% { opacity: 0; background-position: 0 18px; }
+    90% { opacity: 1; background-position: 0 18px; }
+    100% { opacity: 0; background-position: 0 183px; }
+}
